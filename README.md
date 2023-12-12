@@ -28,12 +28,17 @@ Each time block has an input field and save button where users can store their s
 Once it saved, it will store in their local storage.
 This calendar is desktop and mobile compatible.
 
-# URLs
-GitPage sites: https://oxanal3891.github.io/planner-app
-GitHub repository: https://github.com/Oxanal3891/planner-app
+# GitHub repository URL
+https://github.com/Oxanal3891/planner-app
 
-# Mock-Up
-https://github.com/Oxanal3891/project-tracker/blob/main/images/05-third-party-apis-homework-demo.gif
+# GitPage site URL
+https://oxanal3891.github.io/planner-app
+
+# Preview
+![05-third-party-apis-homework-demo](https://github.com/Oxanal3891/planner-app/assets/148264525/4ebe75c2-2632-4d0e-b086-2c569b98d04e)
+
+# Code Preview
+![screenshot2](https://github.com/Oxanal3891/planner-app/assets/148264525/c617333c-8c16-4f84-a7ce-f3915dd9883d)
 
 # Tech Stack
 HTML, Javascript, CSS, JQuery
