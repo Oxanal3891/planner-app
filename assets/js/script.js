@@ -3,4 +3,12 @@ $(document).ready(function displayDay() {
 })
 
 
-var currentHour = dayjs().format('H'); 
+var emptyTimeArray = Array.from(new Array(18));
+
+let plannerHours = emptyTimeArray.map((x, i) => {
+  let hour = dayjs().hour(i).format('H A');
+  return { hour };
+});
+
+plannerHours.splice(0, 9);
+console.log(plannerHours);
