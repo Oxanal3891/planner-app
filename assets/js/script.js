@@ -5,6 +5,7 @@ let currentTime = { formatted: dayjs().format('h A'), hour: dayjs().format('HH')
 let store = window.localStorage;
 let now = dayjs();
 
+
 //Add date display
 
 $(document).ready(function displayDay() {
@@ -28,17 +29,25 @@ console.log(plannerHours)
 console.log(currentTime)
 
 //Colorcode function
+/*
 function color(hours) {
-  if (hours.formatted == currentTime.hour) { 'present' }
-  else if (hours.formatted < currentTime.formatted) { 'past' }
+  if (hours.formatted == currentTime.formatted) { 'present' }
+  else if (hours.hour < currentTime) { 'past' }
   else { 'future' }
+}*/
+function color(hours) {
+  return hours.formatted === currentTime.formatted
+    ? "present"
+    : hours.hour < currentTime
+      ? "past"
+      : "future";
 }
 
 //Create a grid template 
 
 plannerHours.forEach((addRows) => {
   let grid = $(
-    `<form data-name="${addRows.formatted}" class="grid grid-cols-12  row"></form>.`
+    `<form data-name="${addRows.formatted}" class="grid grid-cols-12 row"></form>.`
   );
 
   let hours = $(
@@ -46,10 +55,11 @@ plannerHours.forEach((addRows) => {
   );
 
   let textArea = $(
-    `<textarea name="${addRows.formatted
-    }" class="col-8 textarea ${color(addRows)}">${store.getItem(addRows.formatted) || ""}</textarea>`
+    `<textarea name="${addRows.formatted}"
+    class="col-8 textarea ${color(addRows)}">${store.getItem(addRows.formatted) || ""}</textarea>`
   );
 
+  //Prevent default on submit button
   textArea.keydown((e) => {
     if (e.keyCode == 13 && !e.shiftKey) {
       e.preventDefault();
@@ -61,21 +71,14 @@ plannerHours.forEach((addRows) => {
   let saveBtn = $(
     `<button type="submit" class="col-2 saveBtn"><i class="fas fa-save"></i></button>`
   );
-  -1
-
-  $('#btn').mouseover(function (e) {
-    $(this).addClass('hoverState');
-  }).mouseout(function (e) {
-    $(this).removeClass('hoverState');
-  });
-  //
+  //Store value
   grid.submit((e) => {
     e.preventDefault();
     let value = $(`textarea[name="${addRows.formatted}"]`).val();
     store.setItem(addRows.formatted, value);
   });
 
-
+  //Append columns
   grid.append(hours);
   grid.append(textArea);
   grid.append(saveBtn);
