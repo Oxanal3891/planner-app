@@ -49,6 +49,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
 }
 
 .past {
@@ -73,9 +74,6 @@ header {
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .saveBtn i:hover {

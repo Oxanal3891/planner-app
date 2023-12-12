@@ -1,43 +1,53 @@
+//Declare variables
+let container = $(".container");
+let currentDay = dayjs().format('dddd, MMMM D')
+let currentTime = { formatted: dayjs().format('h A'), hour: dayjs().format('HH') };
+let store = window.localStorage;
+let now = dayjs();
+
 //Add date display
 
 $(document).ready(function displayDay() {
-  $('#currentDay').text(dayjs().format('dddd, MMMM D'));
+  $('#currentDay').text(currentDay);
 })
 
-
-//Create an array of planner hours in DayJs format from 9am to 5pm
+//Create an object of planner hours in DayJs format from 9am to 5pm
 
 var emptyTimeArray = Array.from(new Array(18));
 
 function converttoDayJs(x, i) {
-  let hour = dayjs().hour(i).format('h A');
-  return { hour };
+  let formatted = dayjs().hour(i).format('h A')
+  let hour = dayjs().hour(i).format('HH');
+  return { formatted, hour };
 };
 let plannerHours = emptyTimeArray.map(converttoDayJs);
 
 plannerHours.splice(0, 9);
 
 console.log(plannerHours)
+console.log(currentTime)
 
-//Create a row for each planner hour
+//Colorcode function
+function color(hours) {
+  if (hours.formatted == currentTime.hour) { 'present' }
+  else if (hours.formatted < currentTime.formatted) { 'past' }
+  else { 'future' }
+}
 
-let store = window.localStorage;
-let container = $(".container");
+//Create a grid template 
 
-function addRows() {
+plannerHours.forEach((addRows) => {
   let grid = $(
-    `<form data-name="${addRows.text}" class="grid grid-cols-12  border-gray-500 "></form>.`
+    `<form data-name="${addRows.formatted}" class="grid grid-cols-12  row"></form>.`
   );
 
   let hours = $(
-    `<div class="hour">${addRows.text}</div>`
+    `<div class="col-2 hour">${addRows.formatted}</div>`
   );
 
   let textArea = $(
-    `<textarea name="${addRows.text
-    }" class="textarea ${color(
-      addRows
-    )}">${store.getItem(addRows.text) || ""}</textarea>`
+    `<textarea name="${addRows.formatted
+    }" class="col-8 textarea ${color(addRows)}">${store.getItem(addRows.formatted) || ""}</textarea>`
   );
 
   textArea.keydown((e) => {
@@ -47,35 +57,28 @@ function addRows() {
     }
   })
 
-
-  //Colorcode function
-
-  function color(hours) {
-    let currentHour = dayjs().format('h A');
-    if (hours == currentHour) { "present" }
-    else if (hours < currentHour) { "past" }
-    else { "future" }
-  }
-
   //Add button
   let saveBtn = $(
-    `<button type="submit" class="saveBtn"><i class="fas fa-save"></i></button>`
+    `<button type="submit" class="col-2 saveBtn"><i class="fas fa-save"></i></button>`
   );
+  -1
 
+  $('#btn').mouseover(function (e) {
+    $(this).addClass('hoverState');
+  }).mouseout(function (e) {
+    $(this).removeClass('hoverState');
+  });
   //
   grid.submit((e) => {
     e.preventDefault();
-
-    const value = $(`textarea[name="${addRows.text}"]`).val();
-
-    store.setItem(addRows.text, value);
+    let value = $(`textarea[name="${addRows.formatted}"]`).val();
+    store.setItem(addRows.formatted, value);
   });
+
 
   grid.append(hours);
   grid.append(textArea);
   grid.append(saveBtn);
 
   container.append(grid);
-};
-
-plannerHours.forEach(addRows)
+})
