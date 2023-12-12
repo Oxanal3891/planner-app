@@ -22,6 +22,7 @@ console.log(plannerHours)
 //Create a row for each planner hour
 
 let store = window.localStorage;
+let container = $(".container");
 
 function addRows() {
   let grid = $(
@@ -45,14 +46,36 @@ function addRows() {
       return false;
     }
   })
-}
-addRows()
 
-//Colorcode function
 
-function color(hours) {
-  let currentHour = dayjs().format('h A');
-  if (hours == currentHour) { "present" }
-  else if (hours < currentHour) { "past" }
-  else { "future" }
-}
+  //Colorcode function
+
+  function color(hours) {
+    let currentHour = dayjs().format('h A');
+    if (hours == currentHour) { "present" }
+    else if (hours < currentHour) { "past" }
+    else { "future" }
+  }
+
+  //Add button
+  let saveBtn = $(
+    `<button type="submit" class="saveBtn"><i class="fas fa-save"></i></button>`
+  );
+
+  //
+  grid.submit((e) => {
+    e.preventDefault();
+
+    const value = $(`textarea[name="${addRows.text}"]`).val();
+
+    store.setItem(addRows.text, value);
+  });
+
+  grid.append(hours);
+  grid.append(textArea);
+  grid.append(saveBtn);
+
+  container.append(grid);
+};
+
+plannerHours.forEach(addRows)
