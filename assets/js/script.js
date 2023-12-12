@@ -29,25 +29,18 @@ console.log(plannerHours)
 console.log(currentTime)
 
 //Colorcode function
-/*
-function color(hours) {
-  if (hours.formatted == currentTime.formatted) { 'present' }
-  else if (hours.hour < currentTime) { 'past' }
-  else { 'future' }
-}*/
-function color(hours) {
-  return hours.formatted === currentTime.formatted
-    ? "present"
-    : hours.hour < currentTime
-      ? "past"
-      : "future";
+
+function colorCode(hours) {
+  if (hours.formatted == currentTime.formatted) { return 'present' }
+  else if (hours.hour < currentTime) { return 'past' }
+  else { return 'future' }
 }
 
 //Create a grid template 
 
 plannerHours.forEach((addRows) => {
   let grid = $(
-    `<form data-name="${addRows.formatted}" class="grid grid-cols-12 row"></form>.`
+    `<form class="grid grid-cols-12 row"></form>.`
   );
 
   let hours = $(
@@ -56,7 +49,7 @@ plannerHours.forEach((addRows) => {
 
   let textArea = $(
     `<textarea name="${addRows.formatted}"
-    class="col-8 textarea ${color(addRows)}">${store.getItem(addRows.formatted) || ""}</textarea>`
+    class="col-8 textarea ${colorCode(addRows)}">${store.getItem(addRows.formatted) || ""}</textarea>`
   );
 
   //Prevent default on submit button
@@ -85,3 +78,4 @@ plannerHours.forEach((addRows) => {
 
   container.append(grid);
 })
+
