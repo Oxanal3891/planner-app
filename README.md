@@ -19,9 +19,12 @@ Acceptance Criteria
 - THEN the text for that event is saved in local storage
 - WHEN I refresh the page
 - THEN the saved events persist
-- 
+  
+# Target visual & functionality
+![05-third-party-apis-homework-demo](https://github.com/Oxanal3891/planner-app/assets/148264525/4ebe75c2-2632-4d0e-b086-2c569b98d04e)
+
 # Usage
-This workday calendar display work hours of the day 8AM - 5PM.
+This workday calendar displays work hours of the day 9AM - 5PM.
 On the top of the page, current day and date is diplayed.
 Each time block is color coded to indicate whether it occurs in the past(gray), present(red), or future(green).
 Each time block has an input field and save button where users can store their schedule.
@@ -34,10 +37,11 @@ https://github.com/Oxanal3891/planner-app
 # GitPage site URL
 https://oxanal3891.github.io/planner-app
 
-# Preview
-![05-third-party-apis-homework-demo](https://github.com/Oxanal3891/planner-app/assets/148264525/4ebe75c2-2632-4d0e-b086-2c569b98d04e)
+# App Preview 
+The table is coloured grey after the workday is over: 
+![screenshot1](https://github.com/Oxanal3891/planner-app/assets/148264525/86f4bdab-6506-43a4-9dc6-90f558b34d66)
 
-# Code Preview
+# Code Screenshot
 ![screenshot2](https://github.com/Oxanal3891/planner-app/assets/148264525/c617333c-8c16-4f84-a7ce-f3915dd9883d)
 
 # Tech Stack
